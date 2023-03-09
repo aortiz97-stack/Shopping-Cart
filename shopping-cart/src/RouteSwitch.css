@@ -37,9 +37,13 @@ nav {
     width: 100%;
     background-color: #dbd20b;
     color: #312a2a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 ul {
+    width: 100%;
     display: flex;
     justify-content: space-around;
 }
@@ -48,8 +52,16 @@ li {
     list-style: none;
 }
 
-#app-container {
+#app-container, #products-container {
     height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+}
+
+#app-container {
     color: #312a2a;
     display: flex;
     flex-direction: column;
@@ -58,7 +70,7 @@ li {
     gap: 10px;
 }
 
-.imgContainer {
+.img-container, .image-container {
     height: 50%;
     width: 50%;
     display: flex;
@@ -68,4 +80,77 @@ li {
 img {
     max-height: 100%;
     max-width: 100%;
+}
+
+#products-container {
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 25px;
+}
+
+#grid-container {
+    margin-bottom: 50px;
+    width: 50%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    row-gap: 50px;
+    column-gap: 50px;
+    padding-top: 25px;
+    margin-bottom: 25px;
+}
+
+.grid-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 100%;
+    width: 100%;
+    border: #f0f0f0 1px solid;
+}
+
+.grid-cell-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50%;
+}
+
+.grid-cell-bottom h2, .grid-cell-bottom h3 {
+    margin: 0;
+}
+
+.description-container {
+    width: 100%;
+    text-align: center;
+    background-color: #312a2a;
+    color: #ffffff;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.price-container {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: #ffffff;
+    color: #312a2a;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding-bottom: 10px;
+}
+
+.image-container.small {
+}
+
+#products-container button {
+    width: 75%;
 }
