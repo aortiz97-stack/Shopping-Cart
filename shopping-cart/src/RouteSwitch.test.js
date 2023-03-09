@@ -10,7 +10,15 @@ jest.mock("./components/App", () => () => (
 ));
 
 jest.mock("./components/Products", () => () => (
-    <h1>This is the products component</h1>
+    <div>
+        <button onClick={jest.fn()}></button>
+        <button onClick={jest.fn()}></button>
+        <button onClick={jest.fn()}></button>
+        <button onClick={jest.fn()}></button>
+        <button onClick={jest.fn()}></button>
+        <button onClick={jest.fn()}></button>
+        <h1>This is the products component</h1>
+    </div>
 ));
 
 jest.mock("./components/ShoppingCart", () => () => (
