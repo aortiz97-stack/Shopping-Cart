@@ -1,12 +1,11 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import { Link } from 'react-router-dom';
-//import '@testing-library/jest-dom'
+import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
+import './RouteSwitch.css';
 import App from './components/App';
 import Products from './components/Products';
 import ShoppingCart from './components/ShoppingCart';
 const RouteSwitch = () => {
     return (
-    <div>
+    <div id='whole-container'>
         <BrowserRouter>
             <nav role="navigation">
                 <ul>

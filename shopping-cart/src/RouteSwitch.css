@@ -1,0 +1,71 @@
+@font-face {
+    font-family: ThunderMan;
+    src: url('./fonts/Thunderman.ttf');
+}
+
+* {
+    font-family: ThunderMan, sans-serif;
+}
+body {
+    height: 100vh;
+    width:100vw;  
+}
+
+#root {
+    height: 100%;
+    width: 100%;
+}
+
+#whole-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background-color: #ece43f;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: #312a2a;
+}
+
+nav {
+    height: 20%;
+    width: 100%;
+    background-color: #dbd20b;
+    color: #312a2a;
+}
+
+ul {
+    display: flex;
+    justify-content: space-around;
+}
+
+li {
+    list-style: none;
+}
+
+#app-container {
+    height: 80%;
+    color: #312a2a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.imgContainer {
+    height: 50%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+img {
+    max-height: 100%;
+    max-width: 100%;
+}

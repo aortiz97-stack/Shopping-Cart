@@ -1,8 +1,14 @@
 import './App.css';
+import lemongrab from '../images/lemongrab.png'
 
 const App = () => {
   return (
-    <div><h1>Hello</h1></div>
+    <div id="app-container">
+      <div className='imgContainer'>
+        <img src={lemongrab} alt="The earl of Lemongrab, a yellow lemon humanoid"/>
+      </div>
+      <h3>Hmmm don't buy my stuff</h3>
+    </div>
   );
 }
 
