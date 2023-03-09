@@ -2,6 +2,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 //import '@testing-library/jest-dom'
 import App from './components/App';
+import Products from './components/Products';
 const RouteSwitch = () => {
     return (
     <div>
@@ -15,7 +16,7 @@ const RouteSwitch = () => {
             </nav>
             <Routes>
                 <Route path="/" element={<App />}/>
-                <Route path="/products" element={<App />}/>
+                <Route path="/products" element={<Products />}/>
                 <Route path="/shopping-cart" element={<App />}/>
                 
             </Routes>
