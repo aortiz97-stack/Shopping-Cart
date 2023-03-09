@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 //import '@testing-library/jest-dom'
 import App from './components/App';
 import Products from './components/Products';
+import ShoppingCart from './components/ShoppingCart';
 const RouteSwitch = () => {
     return (
     <div>
@@ -17,7 +18,7 @@ const RouteSwitch = () => {
             <Routes>
                 <Route path="/" element={<App />}/>
                 <Route path="/products" element={<Products />}/>
-                <Route path="/shopping-cart" element={<App />}/>
+                <Route path="/shopping-cart" element={<ShoppingCart />}/>
                 
             </Routes>
         </BrowserRouter>
