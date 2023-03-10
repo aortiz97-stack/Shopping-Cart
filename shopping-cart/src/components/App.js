@@ -1,4 +1,3 @@
-import './App.css';
 import lemongrab from '../images/lemongrab.png'
 
 const App = () => {
@@ -7,7 +6,7 @@ const App = () => {
       <div className='img-container'>
         <img src={lemongrab} alt="The earl of Lemongrab, a yellow lemon humanoid"/>
       </div>
-      <h3>Hmmm don't buy my stuff</h3>
+      <h3>Hmmm don't buy my things</h3>
     </div>
   );
 }

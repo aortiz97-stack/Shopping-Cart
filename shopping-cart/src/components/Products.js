@@ -5,7 +5,36 @@ import lemonCamel from '../images/lemoncamel.png';
 import catchersMitt from '../images/catchersmitt.png';
 import sleepingCap from '../images/sleeping-cap.png';
 import harpSmasher from '../images/harp-smasher.png';
+import { useState, useEffect } from 'react';
 const Products = () => {
+    const [productsList, setProductsList] = useState([]);
+
+
+    useEffect(() => {
+        const allButtons = Array.from(document.querySelectorAll('#products-container button'));
+        const isInCart = (button) => {
+          for (let i = 0; i < productsList.length; i += 1) {
+              const product = productsList[i];
+              if (button.id === product.name) return true;
+          }
+          return false;
+        }
+
+        allButtons.forEach((button) => {
+            const handleClick = (e) => {
+                setProductsList(productsList.concat({name: e.target.id, cost: e.target.className}));
+            };
+            if (!isInCart(button)) button.addEventListener('click', handleClick);
+        });
+
+        return (allButtons.forEach((button) => {
+            const handleClick = (e) => {
+                setProductsList(productsList.concat({name: e.target.id, cost: e.target.className}));
+            };
+            button.removeEventListener('click', handleClick);
+        }));
+    }, [productsList])
+
     return(
       <div id='products-container'>
           <div id="grid-container">
@@ -17,7 +46,7 @@ const Products = () => {
                       <div className="description-container"><h2>Seedwad</h2></div>
                       <div className="price-container">
                           <h3>$59.99</h3>
-                          <button>Add to cart</button>
+                          <button id="Seedwad" className={59.99}>Add to cart</button>
                       </div>
                       
                   </div>
@@ -32,14 +61,14 @@ const Products = () => {
                       </div>
                       <div className="price-container">
                           <h3>$1,200.32</h3>
-                          <button>Add to cart</button>
+                          <button id="Sound Sword" className={1200.32}>Add to cart</button>
                       </div>
                      
                   </div>
               </div>
               <div className="grid-cell">
                   <div className="image-container small">
-                      <img src={lemonCamel} alt="LemonCamel, Lemongrab's camel made out of lemon candy"/>
+                      <img src={lemonCamel} alt="Lemon Camel, Lemongrab's camel made out of lemon candy"/>
                   </div>
                   <div className="grid-cell-bottom">
                       <div className="description-container">
@@ -47,7 +76,7 @@ const Products = () => {
                       </div>
                       <div className="price-container">
                           <h3>$500.99</h3>
-                          <button>Add to cart</button>
+                          <button id="Lemon Camel" className={500.99}>Add to cart</button>
                       </div>
                   </div>
               </div>
@@ -61,7 +90,7 @@ const Products = () => {
                       </div>
                       <div className="price-container">
                           <h3>$55.32</h3>
-                          <button>Add to cart</button>
+                          <button id="Catcher's Mitt" className={55.32}>Add to cart</button>
                       </div>
                  
                   </div>
@@ -76,7 +105,7 @@ const Products = () => {
                       </div>
                       <div className="price-container">
                           <h3>$100,237</h3>
-                          <button>Add to cart</button>
+                          <button id="Lemonsweet's Cap" className={100237}>Add to cart</button>
                       </div>
                  
                   </div>
@@ -91,7 +120,7 @@ const Products = () => {
                       </div>
                       <div className="price-container">
                           <h3>$23.18</h3>
-                          <button>Add to cart</button>
+                          <button id="Harp Smasher" className={23.18}>Add to cart</button>
                       </div>
                   </div>
               </div>
