@@ -4,14 +4,19 @@ import {render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { act } from 'react-dom/test-utils';
 import Products from './Products';
+import RouteSwitch from '../RouteSwitch';
+
 describe("Products component", () => {
-  /*test("Component sends list of items added to cart", async () => {
-    render(<Products />);
+  test("Component sends one quantity of each item correctly to cart", () => {
+      render(<RouteSwitch/>);
+      act(() => userEvent.click(screen.getByRole('link', {name: /Products/i})));
 
-    const items = screen.getAllByRole('button', {name: /Add to cart/i});
-    await act(async() => userEvent.click(items[0]));
-    await act(async() => userEvent.click(items[1]));
+      const allButtons = screen.getAllByRole('button', {name: /Add to cart/i});
+      const count = screen.getByText(0);
+      act(() => userEvent.click(allButtons[0]));
+      act(() => userEvent.click(allButtons[0]));
+      act(() => userEvent.click(allButtons[1]));
+      expect(Number(count.textContent)).toBe(2);
 
-    userEvent.
-  });*/
+  });
 });
