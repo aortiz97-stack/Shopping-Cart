@@ -11,31 +11,35 @@ const Products = ({count, setCount, cart, setCart}) => {
 
     useEffect(() => {
         const allButtons = Array.from(document.querySelectorAll('#products-container button'));
-        const isInCart = (button) => {
-          for (let i = 0; i < cart.length; i += 1) {
-              const product = cart[i];
-              if (button.id === product.name) return true;
-          }
-          return false;
-        }
-
-        const updateCounter = () => {
-          setCount(count + 1);
-        }
 
         allButtons.forEach((button) => {
             const handleClick = (e) => {
-                setCart(cart.concat({name: e.target.id, cost: e.target.className}));
-                updateCounter();
+                const qtySelector = document.querySelector(`#${e.target.id}-select`);
+                console.log(`the selector ${qtySelector.value}`);
+                let newCart = JSON.parse(JSON.stringify(cart));
+                let newCount = JSON.parse(JSON.stringify(count));
+                for (let i = 0; i < Number(qtySelector.value); i += 1) {
+                    newCart = (newCart.concat({name: e.target.id, cost: e.target.className}));
+                    newCount += 1;
+                }
+                setCart(newCart);
+                setCount(newCount);
             };
-            if (!isInCart(button)) button.addEventListener('click', handleClick);
-            else console.log('the event listener is not added');
+            button.addEventListener('click', handleClick);
         });
 
         return (allButtons.forEach((button) => {
             const handleClick = (e) => {
-                setCart(cart.concat({name: e.target.id, cost: e.target.className}));
-                updateCounter();
+                const qtySelector = document.querySelector(`#${e.target.id}-select`);
+                console.log(`the selector ${qtySelector.value}`);
+                let newCart = JSON.parse(JSON.stringify(cart));
+                let newCount = JSON.parse(JSON.stringify(count));
+                for (let i = 0; i < Number(qtySelector.value); i += 1) {
+                    newCart = (newCart.concat({name: e.target.id, cost: e.target.className}));
+                    newCount += 1;
+                }
+                setCart(newCart);
+                setCount(newCount);
             };
             button.removeEventListener('click', handleClick);
         }));
@@ -52,6 +56,15 @@ const Products = ({count, setCount, cart, setCart}) => {
                       <div className="description-container"><h2>Seedwad</h2></div>
                       <div className="price-container">
                           <h3>$59.99</h3>
+                          <label htmlFor="Seedwad-select">Qty 
+                              <select id="Seedwad-select" defaultValue={1}>
+                                  <option value={1}>1</option>
+                                  <option value={2}>2</option>
+                                  <option value={3}>3</option>
+                                  <option value={4}>4</option>
+                                  <option value={5}>5</option>
+                              </select>
+                          </label>
                           <button id="Seedwad" className={59.99}>Add to cart</button>
                       </div>
                       
@@ -67,6 +80,15 @@ const Products = ({count, setCount, cart, setCart}) => {
                       </div>
                       <div className="price-container">
                           <h3>$1,200.32</h3>
+                          <label htmlFor="Sound_Sword-select">Qty 
+                              <select id="Sound_Sword-select" defaultValue={1}>
+                                  <option value={1}>1</option>
+                                  <option value={2}>2</option>
+                                  <option value={3}>3</option>
+                                  <option value={4}>4</option>
+                                  <option value={5}>5</option>
+                              </select>
+                          </label>
                           <button id="Sound_Sword" className={1200.32}>Add to cart</button>
                       </div>
                      
@@ -82,6 +104,15 @@ const Products = ({count, setCount, cart, setCart}) => {
                       </div>
                       <div className="price-container">
                           <h3>$500.99</h3>
+                          <label htmlFor="Lemon_Camel-select">Qty 
+                              <select id="Lemon_Camel-select" defaultValue={1}>
+                                  <option value={1}>1</option>
+                                  <option value={2}>2</option>
+                                  <option value={3}>3</option>
+                                  <option value={4}>4</option>
+                                  <option value={5}>5</option>
+                              </select>
+                          </label>
                           <button id="Lemon_Camel" className={500.99}>Add to cart</button>
                       </div>
                   </div>
@@ -96,6 +127,15 @@ const Products = ({count, setCount, cart, setCart}) => {
                       </div>
                       <div className="price-container">
                           <h3>$55.32</h3>
+                          <label htmlFor="Catcher's_Mitt-select">Qty 
+                              <select id="Catcher's-Mitt-select" defaultValue={1}>
+                                  <option value={1}>1</option>
+                                  <option value={2}>2</option>
+                                  <option value={3}>3</option>
+                                  <option value={4}>4</option>
+                                  <option value={5}>5</option>
+                              </select>
+                          </label>
                           <button id="Catcher's_Mitt" className={55.32}>Add to cart</button>
                       </div>
                  
@@ -111,6 +151,15 @@ const Products = ({count, setCount, cart, setCart}) => {
                       </div>
                       <div className="price-container">
                           <h3>$100,237</h3>
+                          <label htmlFor="Lemonsweet's-Cap-select">Qty 
+                              <select id="Lemonsweet's-Cap-select" defaultValue={1}>
+                                  <option value={1}>1</option>
+                                  <option value={2}>2</option>
+                                  <option value={3}>3</option>
+                                  <option value={4}>4</option>
+                                  <option value={5}>5</option>
+                              </select>
+                          </label>
                           <button id="Lemonsweet's_Cap" className={100237}>Add to cart</button>
                       </div>
                  
@@ -126,6 +175,15 @@ const Products = ({count, setCount, cart, setCart}) => {
                       </div>
                       <div className="price-container">
                           <h3>$23.18</h3>
+                          <label htmlFor="Harp_Smasher-select">Qty 
+                              <select id="Harp_Smasher-select" defaultValue={1}>
+                                  <option value={1}>1</option>
+                                  <option value={2}>2</option>
+                                  <option value={3}>3</option>
+                                  <option value={4}>4</option>
+                                  <option value={5}>5</option>
+                              </select>
+                          </label>
                           <button id="Harp_Smasher" className={23.18}>Add to cart</button>
                       </div>
                   </div>
