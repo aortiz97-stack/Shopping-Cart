@@ -50,6 +50,8 @@ ul {
 
 li {
     list-style: none;
+    display: flex;
+    align-items: center;
 }
 
 #app-container, #products-container {
@@ -75,6 +77,18 @@ li {
     width: 50%;
     display: flex;
     justify-content: center;
+}
+
+#shopping-icon-container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+li button {
+    background-color:#dbd20b;
+    border: none;
 }
 
 img {

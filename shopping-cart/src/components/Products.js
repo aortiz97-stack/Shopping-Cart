@@ -5,35 +5,41 @@ import lemonCamel from '../images/lemoncamel.png';
 import catchersMitt from '../images/catchersmitt.png';
 import sleepingCap from '../images/sleeping-cap.png';
 import harpSmasher from '../images/harp-smasher.png';
-import { useState, useEffect } from 'react';
-const Products = () => {
-    const [productsList, setProductsList] = useState([]);
+import { useEffect } from 'react';
+const Products = ({count, setCount, cart, setCart}) => {
 
 
     useEffect(() => {
         const allButtons = Array.from(document.querySelectorAll('#products-container button'));
         const isInCart = (button) => {
-          for (let i = 0; i < productsList.length; i += 1) {
-              const product = productsList[i];
+          for (let i = 0; i < cart.length; i += 1) {
+              const product = cart[i];
               if (button.id === product.name) return true;
           }
           return false;
         }
 
+        const updateCounter = () => {
+          setCount(count + 1);
+        }
+
         allButtons.forEach((button) => {
             const handleClick = (e) => {
-                setProductsList(productsList.concat({name: e.target.id, cost: e.target.className}));
+                setCart(cart.concat({name: e.target.id, cost: e.target.className}));
+                updateCounter();
             };
             if (!isInCart(button)) button.addEventListener('click', handleClick);
+            else console.log('the event listener is not added');
         });
 
         return (allButtons.forEach((button) => {
             const handleClick = (e) => {
-                setProductsList(productsList.concat({name: e.target.id, cost: e.target.className}));
+                setCart(cart.concat({name: e.target.id, cost: e.target.className}));
+                updateCounter();
             };
             button.removeEventListener('click', handleClick);
         }));
-    }, [productsList])
+    }, [cart])
 
     return(
       <div id='products-container'>
@@ -61,7 +67,7 @@ const Products = () => {
                       </div>
                       <div className="price-container">
                           <h3>$1,200.32</h3>
-                          <button id="Sound Sword" className={1200.32}>Add to cart</button>
+                          <button id="Sound_Sword" className={1200.32}>Add to cart</button>
                       </div>
                      
                   </div>
@@ -76,7 +82,7 @@ const Products = () => {
                       </div>
                       <div className="price-container">
                           <h3>$500.99</h3>
-                          <button id="Lemon Camel" className={500.99}>Add to cart</button>
+                          <button id="Lemon_Camel" className={500.99}>Add to cart</button>
                       </div>
                   </div>
               </div>
@@ -90,7 +96,7 @@ const Products = () => {
                       </div>
                       <div className="price-container">
                           <h3>$55.32</h3>
-                          <button id="Catcher's Mitt" className={55.32}>Add to cart</button>
+                          <button id="Catcher's_Mitt" className={55.32}>Add to cart</button>
                       </div>
                  
                   </div>
@@ -105,7 +111,7 @@ const Products = () => {
                       </div>
                       <div className="price-container">
                           <h3>$100,237</h3>
-                          <button id="Lemonsweet's Cap" className={100237}>Add to cart</button>
+                          <button id="Lemonsweet's_Cap" className={100237}>Add to cart</button>
                       </div>
                  
                   </div>
@@ -120,7 +126,7 @@ const Products = () => {
                       </div>
                       <div className="price-container">
                           <h3>$23.18</h3>
-                          <button id="Harp Smasher" className={23.18}>Add to cart</button>
+                          <button id="Harp_Smasher" className={23.18}>Add to cart</button>
                       </div>
                   </div>
               </div>
