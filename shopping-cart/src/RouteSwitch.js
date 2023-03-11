@@ -4,10 +4,12 @@ import App from './components/App';
 import Products from './components/Products';
 import ShoppingCart from './components/ShoppingCart';
 import shopIcon from './images/shopping-cart.png';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 const RouteSwitch = () => {
     const [count, setCount] = useState(0);
     const [cart, setCart] = useState([]);
+    const [currRoute, setCurrRoute] = useState("App");
+
     return (
     <div id='whole-container'>
         <BrowserRouter>
@@ -26,9 +28,9 @@ const RouteSwitch = () => {
                 </ul>
             </nav>
             <Routes>
-                <Route path="/" element={<App />}/>
-                <Route path="/products" element={<Products count={count} setCount={(e) => {setCount(e)}} cart={cart} setCart={(e)=> setCart(e)}/>}/>
-                <Route path="/shopping-cart" element={<ShoppingCart />}/>
+                <Route path="/" element={<App setCurrRoute={(e) => setCurrRoute(e)}/>}/>
+                <Route path="/products" element={<Products count={count} setCount={(e) => {setCount(e)}} cart={cart} setCart={(e)=> setCart(e)} setCurrRoute={(e) => setCurrRoute(e)} />}/>
+                <Route path="/shopping-cart" element={<ShoppingCart count={count} setCount={(e) => {setCount(e)}} cart={cart} setCart={(e)=> setCart(e)} setCurrRoute={(e) => setCurrRoute(e)} currRoute={currRoute}/>}/>
                 
             </Routes>
         </BrowserRouter>

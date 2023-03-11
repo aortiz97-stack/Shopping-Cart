@@ -6,10 +6,10 @@ import catchersMitt from '../images/catchersmitt.png';
 import sleepingCap from '../images/sleeping-cap.png';
 import harpSmasher from '../images/harp-smasher.png';
 import { useEffect } from 'react';
-const Products = ({count, setCount, cart, setCart}) => {
 
-
+const Products = ({count, setCount, cart, setCart, setCurrRoute}) => {
     useEffect(() => {
+        setCurrRoute("Products");
         const allButtons = Array.from(document.querySelectorAll('#products-container button'));
 
         allButtons.forEach((button) => {
@@ -127,8 +127,8 @@ const Products = ({count, setCount, cart, setCart}) => {
                       </div>
                       <div className="price-container">
                           <h3>$55.32</h3>
-                          <label htmlFor="Catcher's_Mitt-select">Qty 
-                              <select id="Catcher's-Mitt-select" defaultValue={1}>
+                          <label htmlFor="Catchers_Mitt-select">Qty 
+                              <select id="Catchers_Mitt-select" defaultValue={1}>
                                   <option value={1}>1</option>
                                   <option value={2}>2</option>
                                   <option value={3}>3</option>
@@ -136,7 +136,7 @@ const Products = ({count, setCount, cart, setCart}) => {
                                   <option value={5}>5</option>
                               </select>
                           </label>
-                          <button id="Catcher's_Mitt" className={55.32}>Add to cart</button>
+                          <button id="Catchers_Mitt" className={55.32}>Add to cart</button>
                       </div>
                  
                   </div>
@@ -151,8 +151,8 @@ const Products = ({count, setCount, cart, setCart}) => {
                       </div>
                       <div className="price-container">
                           <h3>$100,237</h3>
-                          <label htmlFor="Lemonsweet's-Cap-select">Qty 
-                              <select id="Lemonsweet's-Cap-select" defaultValue={1}>
+                          <label htmlFor="Lemonsweets_Cap-select">Qty
+                              <select id="Lemonsweets_Cap-select" defaultValue={1}>
                                   <option value={1}>1</option>
                                   <option value={2}>2</option>
                                   <option value={3}>3</option>
@@ -160,7 +160,7 @@ const Products = ({count, setCount, cart, setCart}) => {
                                   <option value={5}>5</option>
                               </select>
                           </label>
-                          <button id="Lemonsweet's_Cap" className={100237}>Add to cart</button>
+                          <button id="Lemonsweets_Cap" className={100237}>Add to cart</button>
                       </div>
                  
                   </div>

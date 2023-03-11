@@ -158,7 +158,7 @@ img {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
     padding-bottom: 10px;
 }
 
@@ -167,4 +167,13 @@ img {
 
 #products-container button {
     width: 75%;
+}
+
+#shopping-container {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 33%;
+    height: 100%;
+    background-color: white;
 }
