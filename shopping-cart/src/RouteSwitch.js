@@ -17,9 +17,9 @@ const RouteSwitch = () => {
                 <ul>
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/products">Products</Link></li>
-                    <li><button><Link to="/shopping-cart">
+                    <li><button id="shop-button"><Link to="/shopping-cart">
                         <div id='shopping-icon-container'>
-                            <img src={shopIcon} alt="shopping cart icon"/>
+                            <img src={shopIcon} alt="shopping cart icon" id="shopping-icon"/>
                             <div id='counter-container'>
                                 <div id='counter'>{count}</div>
                             </div>
