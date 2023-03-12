@@ -177,3 +177,9 @@ img {
     height: 100%;
     background-color: white;
 }
+
+#exit-shopping-container {
+    position: absolute;
+    right: 0;
+    top: 0;
+}

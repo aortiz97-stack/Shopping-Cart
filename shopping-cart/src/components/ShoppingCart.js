@@ -12,8 +12,10 @@ const ShoppingCart = ({count, setCount, cart, setCart, setCurrRoute, currRoute})
         }
         const wholeContainer = document.querySelector("#whole-container");
         const shoppingContainer = document.querySelector('#shopping-container');
+        const shopIcon = document.querySelector('#shopping-icon');
+        const shopExitButton = document.querySelector("#exit-shopping-container");
         const handleExitClick = (e) => {
-            if (e.target.id !== "shopping-container" && e.target.id !== 'shopping-icon') {
+            if ((e.target.id !== "shopping-container" && e.target.id !== 'shopping-icon') || e.target.id === 'exit-shopping-container') {
                 console.log(`hmm hmm hmm`);
                 shoppingContainer.style.visibility = "hidden";
             }
@@ -28,9 +30,8 @@ const ShoppingCart = ({count, setCount, cart, setCart, setCurrRoute, currRoute})
             }
         };
         wholeContainer.addEventListener('click', handleExitClick);
-
-        const shopIcon = document.querySelector('#shopping-icon');
         shopIcon.addEventListener('click', handleEnterClick);
+        shopExitButton.addEventListener('click', handleExitClick);
         
 
     },
@@ -38,7 +39,9 @@ const ShoppingCart = ({count, setCount, cart, setCart, setCurrRoute, currRoute})
 
     return (
     <div id="prev-rendered-and-shopping-container">
-        <div id='shopping-container'></div>
+        <div id='shopping-container'>
+            <button id="exit-shopping-container">x</button>
+        </div>
         {routeToRender}
     </div>)
 }
