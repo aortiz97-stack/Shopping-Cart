@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import App from './App';
 import Products from './Products';
-import RouteSwitch from '../RouteSwitch';
+//import RouteSwitch from '../RouteSwitch';
 import uniqid from 'uniqid';
 
 const ShoppingCart = ({count, setCount, cart, setCart, setCurrRoute, currRoute}) => {
-    const [routeToRender, setRouteToRender] = useState(<App setCurrRoute={(e) => setCurrRoute(e)}/>);
+    const [routeToRender, setRouteToRender] = useState(<App setCurrRoute={(e) => setCurrRoute(e)} />);
     const [itemInfo, setItemInfo] = useState({'Seedwad' : {name: 'Seedwad', cost: 59.99, quantity: 0},
                                     'Sound_Sword' : {name: 'Sound Sword', cost: 1200.32, quantity: 0},
                                     'Lemon_Camel' : {name: 'Lemon Camel', cost: 500.99, quantity: 0},
@@ -22,16 +22,14 @@ const ShoppingCart = ({count, setCount, cart, setCart, setCurrRoute, currRoute})
             'Catchers_Mitt': {name: "Catcher's Mitt", cost: 55.32, quantity: 0},
             'Lemonsweets_Cap': {name: "Lemonsweet's Cap", cost: 100237, quantity: 0},
             'Harp_Smasher': {name: "Harp Smasher", cost: 23.18, quantity: 0}};
-            console.log(`cart  ${JSON.stringify(cart)}`);
             const itemInfoCopy = JSON.parse(JSON.stringify(blankItemInfo));
-            console.log(`itemInfoCopy ${JSON.stringify(blankItemInfo)}`);
+          
             for (let i = 0; i < cart.length; i += 1) {
                 const cartItemObj = cart[i];
                 const internalInfoCopy = JSON.parse(JSON.stringify(itemInfoCopy[cartItemObj.name]));
-                console.log(`internalInfoCopy ${JSON.stringify(internalInfoCopy)}`)
+             
                 internalInfoCopy.quantity = internalInfoCopy.quantity + 1;
                 itemInfoCopy[cartItemObj.name] = internalInfoCopy; 
-                console.log(`itemInfoCopy modified ${JSON.stringify(itemInfoCopy)}`)
             }
             setItemInfo(itemInfoCopy);
         }
@@ -42,40 +40,36 @@ const ShoppingCart = ({count, setCount, cart, setCart, setCurrRoute, currRoute})
 
     const handleExitClick = (e) => {
         if ((e.target.id !== "shopping-container" && e.target.id !== 'shopping-icon') || e.target.id === 'exit-shopping-container') {
-            console.log(`hmm hmm hmm`);
             setVisibility("hidden");
             //shoppingContainer.style.visibility = "hidden";
         }
     };
 
     const handleEnterClick = (e) => {
-        console.log(`id ${e.target.id}`)
         if (e.target.id === 'shopping-icon') {
-            console.log(`it passed`);
             setVisibility("visible");
             //shoppingContainer.style.visibility = "visible";
             
         }
     };
-    
-    useEffect(() => resetItemInfo(), [visibility])
-    useEffect(() => {
+
+    const renderProducts = () => {
         if (currRoute === "Products"){
             setRouteToRender(<Products count={count} setCount={e => setCount(e)} cart={cart} setCart={e=> setCart(e)} setCurrRoute={e => setCurrRoute(e)}/>);
         }
-
+    };
+    
+    useEffect(() => resetItemInfo(), [visibility]);
+    useEffect(() => {
+        renderProducts();
         const wholeContainer = document.querySelector("#whole-container");
-        const shoppingContainer = document.querySelector('#shopping-container');
         const shopIcon = document.querySelector('#shopping-icon');
         const shopExitButton = document.querySelector("#exit-shopping-container");
        
         wholeContainer.addEventListener('click', handleExitClick);
         shopIcon.addEventListener('click', handleEnterClick);
         shopExitButton.addEventListener('click', handleExitClick);
-        
-
-    },
-    [routeToRender]);
+    }, [routeToRender]);
 
     let testID = 0;
     return (

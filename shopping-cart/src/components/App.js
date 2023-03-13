@@ -8,7 +8,7 @@ const App = ({setCurrRoute}) => {
   return (
     <div id="app-container">
       <div className='img-container'>
-        <img src={lemongrab} alt="The earl of Lemongrab, a yellow lemon humanoid"/>
+        <img src={lemongrab} alt="The Earl of Lemongrab, a yellow lemon humanoid"/>
       </div>
       <h3>Hmmm don't buy my things</h3>
     </div>
