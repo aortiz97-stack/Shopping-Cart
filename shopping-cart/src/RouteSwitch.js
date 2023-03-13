@@ -5,6 +5,7 @@ import Products from './components/Products';
 import ShoppingCart from './components/ShoppingCart';
 import shopIcon from './images/shopping-cart.png';
 import {useState, useEffect} from 'react';
+import '@testing-library/jest-dom'
 const RouteSwitch = () => {
     const [count, setCount] = useState(0);
     const [cart, setCart] = useState([]);
@@ -17,9 +18,9 @@ const RouteSwitch = () => {
                 <ul>
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/products">Products</Link></li>
-                    <li><button id="shop-button"><Link to="/shopping-cart">
+                    <li><button id="shop-button" data-testid="shop-button"><Link to="/shopping-cart">
                         <div id='shopping-icon-container'>
-                            <img src={shopIcon} alt="shopping cart icon" id="shopping-icon"/>
+                            <img src={shopIcon} alt="shopping cart icon" id="shopping-icon" data-testid="shopping-icon"/>
                             <div id='counter-container'>
                                 <div id='counter'>{count}</div>
                             </div>
