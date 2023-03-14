@@ -32,7 +32,12 @@ const ShoppingCart = ({cart}) => {
     };
 
     const handleExitClick = (e) => {
-        if ((e.target.id !== "shopping-container" && e.target.id !== 'shopping-icon') || e.target.id === 'exit-shopping-container') {
+        const shoppingContainer = document.querySelector("#shopping-container");
+        console.log(`children ${(Array.from(shoppingContainer.querySelectorAll('*'))).map((child) => {return child})}`);
+        console.log(`child ${e.target}`);
+        if (e.target.id === 'exit-shopping-container') {
+            setVisibility("hidden");
+        } else if (!Array.from(shoppingContainer.querySelectorAll('*')).includes(e.target) && e.target.id !== "shopping-container" && e.target.id !== "shopping-icon") {
             setVisibility("hidden");
         }
     };
@@ -49,6 +54,7 @@ const ShoppingCart = ({cart}) => {
         const wholeContainer = document.querySelector("#whole-container");
         const shopIcon = document.querySelector('#shopping-icon');
         const shopExitButton = document.querySelector("#exit-shopping-container");
+        const shoppingContainer = document.querySelector('#shopping-container');
        
         wholeContainer.addEventListener('click', handleExitClick);
         shopIcon.addEventListener('click', handleEnterClick);
@@ -65,7 +71,7 @@ const ShoppingCart = ({cart}) => {
                     testID += 1;
 
                     if (itemInfo[key].quantity !== 0) {
-                        return <li key={uniqid()} data-testid={`l${testID}`}>{`${itemInfo[key].name} x ${itemInfo[key].quantity} = $${itemInfo[key].quantity * itemInfo[key].cost}`}</li>
+                        return <li key={uniqid()} data-testid={`l${testID}`}>{`${itemInfo[key].name} x ${itemInfo[key].quantity} = $${itemInfo[key].quantity * itemInfo[key].cost}`} <button>Delete</button></li>
                     }
                     return;
                 })}
