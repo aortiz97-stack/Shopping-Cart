@@ -1,10 +1,6 @@
 import lemongrab from '../images/lemongrab.png';
-import {useEffect} from 'react';
 
-const App = ({setCurrRoute}) => {
-  useEffect(()=> {
-    setCurrRoute("App");
-  }, []);
+const App = () => {
   return (
     <div id="app-container">
       <div className='img-container'>

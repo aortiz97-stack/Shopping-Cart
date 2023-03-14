@@ -91,6 +91,10 @@ li button {
     border: none;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 img {
     max-height: 100%;
     max-width: 100%;

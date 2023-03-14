@@ -10,7 +10,6 @@ import {useState, useEffect} from 'react';
 const RouteSwitch = () => {
     const [count, setCount] = useState(0);
     const [cart, setCart] = useState([]);
-    const [currRoute, setCurrRoute] = useState("App");
 
 
 
@@ -21,24 +20,22 @@ const RouteSwitch = () => {
                 <ul>
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/products">Products</Link></li>
-                    <li><button id="shop-button" data-testid="shop-button"><Link to="/shopping-cart">
+                    <li><button id="shop-button" data-testid="shop-button">
                         <div id='shopping-icon-container'>
                             <img src={shopIcon} alt="shopping cart icon" id="shopping-icon" data-testid="shopping-icon"/>
                             <div id='counter-container'>
                                 <div id='counter'>{count}</div>
                             </div>
                         </div>
-                        </Link></button></li>
+                    </button></li>
                 </ul>
             </nav>
             <Routes>
-                <Route path="/" element={<App setCurrRoute={(e) => setCurrRoute(e)} />}/>
-                <Route path="/products" element={<Products count={count} setCount={(e) => {setCount(e)}} cart={cart} setCart={(e)=> setCart(e)} setCurrRoute={(e) => setCurrRoute(e)} />} />
-                <Route path="/shopping-cart" element={<ShoppingCart count={count} setCount={(e) => {setCount(e)}} cart={cart} setCart={(e)=> setCart(e)} setCurrRoute={(e) => setCurrRoute(e)} currRoute={currRoute} />} />
-                
+                <Route path="/" element={<App />}/>
+                <Route path="/products" element={<Products count={count} setCount={(e) => {setCount(e)}} cart={cart} setCart={(e)=> setCart(e)} />} />
             </Routes>
         </BrowserRouter>
-        
+        <ShoppingCart cart={cart} /> 
     </div>   
     );
 };

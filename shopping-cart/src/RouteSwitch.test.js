@@ -21,10 +21,6 @@ jest.mock("./components/Products", () => () => (
     </div>
 ));
 
-jest.mock("./components/ShoppingCart", () => () => (
-    <h1>This is the shopping component</h1>
-));
-
 describe("RouteSwitch component", () => {
     it("contains a navigation bar", () => {
       render(<RouteSwitch />);
@@ -57,12 +53,12 @@ describe("RouteSwitch component", () => {
         expect(screen.getByText(/This is the app component/)).toBeInTheDocument();
     });
 
-    it("renders ShoppingCart when Shopping Cart is clicked by user", async() => {
+    it("renders ShoppingCart section when clicked by user", () => {
         render(<RouteSwitch/>);
-        const shoppingLink = screen.getByRole("link", {name : /Shopping Cart/i});
+        const shoppingImage = screen.getByRole("img", {name : /shopping cart icon/i});
 
-        await act(async () => userEvent.click(shoppingLink));
+        act(() => userEvent.click(shoppingImage));
 
-        expect(screen.getByText(/This is the shopping component/)).toBeInTheDocument();
+        expect(screen.getByRole('button', {name: /x/i})).toBeInTheDocument();
     });
 });

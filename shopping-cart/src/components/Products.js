@@ -7,10 +7,8 @@ import sleepingCap from '../images/sleeping-cap.png';
 import harpSmasher from '../images/harp-smasher.png';
 import { useEffect } from 'react';
 
-const Products = ({count, setCount, cart, setCart, setCurrRoute}) => {
+const Products = ({count, setCount, cart, setCart}) => {
     useEffect(() => {
-        console.log(`cart initially ${JSON.stringify(cart)}`);
-        setCurrRoute("Products");
         const allButtons = Array.from(document.querySelectorAll('#products-container button'));
 
         allButtons.forEach((button) => {
@@ -28,12 +26,9 @@ const Products = ({count, setCount, cart, setCart, setCurrRoute}) => {
             button.addEventListener('click', handleClick);
         });
 
-        console.log(`cart after ${JSON.stringify(cart)}`);
-
         return (allButtons.forEach((button) => {
             const handleClick = (e) => {
                 const qtySelector = document.querySelector(`#${e.target.id}-select`);
-                console.log(`the selector ${qtySelector.value}`);
                 let newCart = JSON.parse(JSON.stringify(cart));
                 let newCount = JSON.parse(JSON.stringify(count));
                 for (let i = 0; i < Number(qtySelector.value); i += 1) {
