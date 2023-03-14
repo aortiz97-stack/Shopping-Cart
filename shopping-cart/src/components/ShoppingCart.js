@@ -23,7 +23,8 @@ const ShoppingCart = ({count, setCount, cart, setCart, setCurrRoute, currRoute})
             'Lemonsweets_Cap': {name: "Lemonsweet's Cap", cost: 100237, quantity: 0},
             'Harp_Smasher': {name: "Harp Smasher", cost: 23.18, quantity: 0}};
             const itemInfoCopy = JSON.parse(JSON.stringify(blankItemInfo));
-          
+
+            //console.log(`resetted cart ${JSON.stringify(cart)}`);
             for (let i = 0; i < cart.length; i += 1) {
                 const cartItemObj = cart[i];
                 const internalInfoCopy = JSON.parse(JSON.stringify(itemInfoCopy[cartItemObj.name]));
@@ -33,10 +34,7 @@ const ShoppingCart = ({count, setCount, cart, setCart, setCurrRoute, currRoute})
             }
             setItemInfo(itemInfoCopy);
         }
-        
     };
-
-
 
     const handleExitClick = (e) => {
         if ((e.target.id !== "shopping-container" && e.target.id !== 'shopping-icon') || e.target.id === 'exit-shopping-container') {
@@ -54,8 +52,9 @@ const ShoppingCart = ({count, setCount, cart, setCart, setCurrRoute, currRoute})
     };
 
     const renderProducts = () => {
+        //console.log(`cart ${JSON.stringify(cart)}`);
         if (currRoute === "Products"){
-            setRouteToRender(<Products count={count} setCount={e => setCount(e)} cart={cart} setCart={e=> setCart(e)} setCurrRoute={e => setCurrRoute(e)}/>);
+            setRouteToRender(<Products count={count} setCount={(e) => {setCount(e)}} cart={cart} setCart={(e)=> setCart(e)} setCurrRoute={(e) => setCurrRoute(e)} />);
         }
     };
     
@@ -87,7 +86,6 @@ const ShoppingCart = ({count, setCount, cart, setCart, setCurrRoute, currRoute})
                 })}
             </ul>
         </div>
-        {routeToRender}
     </div>)
 }
 
