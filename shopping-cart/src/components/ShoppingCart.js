@@ -35,7 +35,10 @@ const ShoppingCart = ({cart, setCart}) => {
         const shoppingContainer = document.querySelector("#shopping-container");
         if (e.target.id === 'exit-shopping-container') {
             setVisibility("hidden");
-        } else if (!Array.from(shoppingContainer.querySelectorAll('*')).includes(e.target) && e.target.id !== "shopping-container" && e.target.id !== "shopping-icon") {
+        } else if (!Array.from(shoppingContainer.querySelectorAll('*')).includes(e.target) && e.target.id !== "shopping-container" && e.target.id !== "shopping-icon" && e.target.className !== "delete-button") {
+            console.log(`pop goes the weasel`);
+            console.log(`the truth ${Array.from(shoppingContainer.querySelectorAll('*')).includes(e.target)}`)
+            console.log(`tag name ${e.target.tagName}`);
             setVisibility("hidden");
         }
     };
@@ -62,16 +65,23 @@ const ShoppingCart = ({cart, setCart}) => {
             console.log(`cartCopy ${cartCopy.map((item) => {return JSON.stringify(item)})}`);
 
             setCart(cartCopy);
+
+            setVisibility("visible");
         }
     };
     
     useEffect(() => {
         resetItemInfo();
-        const shoppingContainer = document.querySelector("#shopping-container");
-        shoppingContainer.addEventListener('click', handleDeleteClick);
+        /*const shoppingContainer = document.querySelector("#shopping-container");
+        shoppingContainer.addEventListener('click', handleDeleteClick);*/
 
     }, [visibility]);
-    
+
+    useEffect(() => {
+        const shoppingContainer = document.querySelector("#shopping-container");
+        shoppingContainer.addEventListener('click', handleDeleteClick);
+    })
+
     useEffect(() => {
         const wholeContainer = document.querySelector("#whole-container");
         const shopIcon = document.querySelector('#shopping-icon');
