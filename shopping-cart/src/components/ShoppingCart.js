@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import uniqid from 'uniqid';
 
-const ShoppingCart = ({cart}) => {
+const ShoppingCart = ({cart, setCart}) => {
     const [itemInfo, setItemInfo] = useState({'Seedwad' : {name: 'Seedwad', cost: 59.99, quantity: 0},
                                     'Sound_Sword' : {name: 'Sound Sword', cost: 1200.32, quantity: 0},
                                     'Lemon_Camel' : {name: 'Lemon Camel', cost: 500.99, quantity: 0},
@@ -33,8 +33,6 @@ const ShoppingCart = ({cart}) => {
 
     const handleExitClick = (e) => {
         const shoppingContainer = document.querySelector("#shopping-container");
-        console.log(`children ${(Array.from(shoppingContainer.querySelectorAll('*'))).map((child) => {return child})}`);
-        console.log(`child ${e.target}`);
         if (e.target.id === 'exit-shopping-container') {
             setVisibility("hidden");
         } else if (!Array.from(shoppingContainer.querySelectorAll('*')).includes(e.target) && e.target.id !== "shopping-container" && e.target.id !== "shopping-icon") {
@@ -45,20 +43,44 @@ const ShoppingCart = ({cart}) => {
     const handleEnterClick = (e) => {
         if (e.target.id === 'shopping-icon') {
             setVisibility("visible");
-            
+        }
+    };
+
+    const handleDeleteClick = (e) => {
+        console.log(`cart ${JSON.stringify(cart)}`);
+        if (e.target.className === 'delete-button') {
+            const cartCopy = JSON.parse(JSON.stringify(cart));
+            for (let i = 0; i < cartCopy.length; i += 1) {
+                const cartItem = cartCopy[i];
+                console.log(`cartItem ${JSON.stringify(cartItem)}`);
+                if (cartItem.name === e.target.id) {
+                    cartCopy.splice(i, 1);
+                    i = -1;
+                }
+            }
+
+            console.log(`cartCopy ${cartCopy.map((item) => {return JSON.stringify(item)})}`);
+
+            setCart(cartCopy);
         }
     };
     
-    useEffect(() => resetItemInfo(), [visibility]);
+    useEffect(() => {
+        resetItemInfo();
+        const shoppingContainer = document.querySelector("#shopping-container");
+        shoppingContainer.addEventListener('click', handleDeleteClick);
+
+    }, [visibility]);
+    
     useEffect(() => {
         const wholeContainer = document.querySelector("#whole-container");
         const shopIcon = document.querySelector('#shopping-icon');
         const shopExitButton = document.querySelector("#exit-shopping-container");
-        const shoppingContainer = document.querySelector('#shopping-container');
        
         wholeContainer.addEventListener('click', handleExitClick);
         shopIcon.addEventListener('click', handleEnterClick);
         shopExitButton.addEventListener('click', handleExitClick);
+      
     }, []);
 
     let testID = 0;
@@ -70,8 +92,11 @@ const ShoppingCart = ({cart}) => {
                 {Object.keys(itemInfo).map((key) => {
                     testID += 1;
 
-                    if (itemInfo[key].quantity !== 0) {
-                        return <li key={uniqid()} data-testid={`l${testID}`}>{`${itemInfo[key].name} x ${itemInfo[key].quantity} = $${itemInfo[key].quantity * itemInfo[key].cost}`} <button>Delete</button></li>
+                    if (itemInfo[key].quantity !== 0) { 
+                        return <li key={uniqid()} data-testid={`l${testID}`}>
+                            <div data-testid={`d${testID}`}>{`${itemInfo[key].name} x ${itemInfo[key].quantity} = $${itemInfo[key].quantity * itemInfo[key].cost}`}</div>
+                            <button className='delete-button' id={key}>Delete</button>
+                        </li>
                     }
                     return;
                 })}

@@ -52,7 +52,7 @@ describe("ShoppingCart component", () => {
         act(() => userEvent.click(screen.getByTestId('shopping-icon')));
 
 
-        expect(screen.getByTestId('l1').textContent).toBe('Seedwad x 1 = $59.99');
+        expect(screen.getByTestId('d1').textContent).toBe('Seedwad x 1 = $59.99');
     });
 
     it("can receive information accurately even when it is closed and clicked back on", () => {
@@ -73,9 +73,45 @@ describe("ShoppingCart component", () => {
         act(() => userEvent.click(allAddToCartButtons[2]));
         act(() => userEvent.click(screen.getByTestId('shopping-icon')));
 
-        expect(screen.getByTestId('l1').textContent).toBe('Seedwad x 1 = $59.99');
-        expect(screen.getByTestId('l2').textContent).toBe('Sound Sword x 2 = $2400.64');
-        expect(screen.getByTestId('l3').textContent).toBe('Lemon Camel x 3 = $1502.97');
+        expect(screen.getByTestId('d1').textContent).toBe('Seedwad x 1 = $59.99');
+        expect(screen.getByTestId('d2').textContent).toBe('Sound Sword x 2 = $2400.64');
+        expect(screen.getByTestId('d3').textContent).toBe('Lemon Camel x 3 = $1502.97');
 
     });
+
+    it('Deletes an item from the cart when button is pressed', () => {
+        render(<RouteSwitch />);
+        act(() => userEvent.click(screen.getByRole('link', {name: /Products/i})));
+
+        const allAddToCartButtons = screen.getAllByRole('button', {name: /Add to cart/i});
+        const allQuantityAdjusters = screen.getAllByRole("combobox");
+        act(() => userEvent.selectOptions(allQuantityAdjusters[0], ["2"]));
+
+        act(() => userEvent.click(allAddToCartButtons[0]));
+        act(() => userEvent.click(screen.getByTestId('shopping-icon')));
+
+        const allDeleteButtons = screen.getAllByRole('button', {name: /Delete/i});
+        act(() => userEvent.click(allDeleteButtons[0]));
+
+        expect(screen.queryByText('Seedwad x 1 = $59.99')).toBe(null);
+    });
+
+    /*it('Decreases the number of an item when quantity is decreased on shopping page') {
+        render(<RouteSwitch />);
+        act(() => userEvent.click(screen.getByRole('link', {name: /Products/i})));
+        const allAddToCartButtons = screen.getAllByRole('button', {name: /Add to cart/i});
+        act(() => userEvent.click(allAddToCartButtons[0]));
+
+        const allQuantityAdjusters = screen.getAllByRole("combobox");
+        act(() => userEvent.selectOptions(allQuantityAdjusters[0], ["2"]));
+        act(() => userEvent.click(allAddToCartButtons[0]));
+
+        act(() => userEvent.click(screen.getByTestId('shopping-icon')));
+        const allShoppingQuantityBoxes = screen.getAllByRole('combobox', {name: /Delete/i});
+
+        act(() => userEvent.selectOptions(allShoppingQuantityBoxes[0], ["1"]));
+        
+
+
+    }*/
 });
