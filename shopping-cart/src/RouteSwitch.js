@@ -12,7 +12,6 @@ const RouteSwitch = () => {
     const [cart, setCart] = useState([]);
 
 
-
     return (
     <div id='whole-container'>
         <BrowserRouter>
@@ -24,7 +23,7 @@ const RouteSwitch = () => {
                         <div id='shopping-icon-container'>
                             <img src={shopIcon} alt="shopping cart icon" id="shopping-icon" data-testid="shopping-icon"/>
                             <div id='counter-container'>
-                                <div id='counter'>{count}</div>
+                                <div id='counter' data-testid = 'counter'>{count}</div>
                             </div>
                         </div>
                     </button></li>
@@ -35,7 +34,7 @@ const RouteSwitch = () => {
                 <Route path="/products" element={<Products count={count} setCount={(e) => {setCount(e)}} cart={cart} setCart={(e)=> setCart(e)} />} />
             </Routes>
         </BrowserRouter>
-        <ShoppingCart cart={cart} setCart={(e) => setCart(e)}/> 
+        <ShoppingCart cart={cart} setCart={(e) => setCart(e)} count={count}setCount={e => setCount(e)}/>
     </div>   
     );
 };

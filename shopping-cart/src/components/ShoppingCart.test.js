@@ -96,6 +96,23 @@ describe("ShoppingCart component", () => {
         expect(screen.queryByText('Seedwad x 1 = $59.99')).toBe(null);
     });
 
+    it('Updates the number of items correctly when an item is completely deleted', () => {
+        render(<RouteSwitch />);
+        act(() => userEvent.click(screen.getByRole('link', {name: /Products/i})));
+
+        const allAddToCartButtons = screen.getAllByRole('button', {name: /Add to cart/i});
+        const allQuantityAdjusters = screen.getAllByRole("combobox");
+        act(() => userEvent.selectOptions(allQuantityAdjusters[0], ["2"]));
+
+        act(() => userEvent.click(allAddToCartButtons[0]));
+        act(() => userEvent.click(screen.getByTestId('shopping-icon')));
+
+        const allDeleteButtons = screen.getAllByRole('button', {name: /Delete/i});
+        act(() => userEvent.click(allDeleteButtons[0]));
+
+        expect(screen.getByTestId("counter").textContent).toBe("0");
+    });
+
     /*it('Decreases the number of an item when quantity is decreased on shopping page') {
         render(<RouteSwitch />);
         act(() => userEvent.click(screen.getByRole('link', {name: /Products/i})));

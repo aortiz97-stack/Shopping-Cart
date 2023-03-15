@@ -5,42 +5,48 @@ import lemonCamel from '../images/lemoncamel.png';
 import catchersMitt from '../images/catchersmitt.png';
 import sleepingCap from '../images/sleeping-cap.png';
 import harpSmasher from '../images/harp-smasher.png';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const Products = ({count, setCount, cart, setCart}) => {
+    const [newCart, setNewCart] = useState(cart);
+    const [newCount, setNewCount] = useState(count);
+
+    let cartCopy =JSON.parse(JSON.stringify(newCart));
+    let countCopy = newCount;
+
+    const handleClick = (e) => {
+        if (e.target.className.includes('add-to-cart')) {
+            const qtySelector = document.querySelector(`#${e.target.id}-select`);
+            //let newestCart = JSON.parse(JSON.stringify(newCart));
+            //let newestCount = JSON.parse(JSON.stringify(newCount));
+            for (let i = 0; i < Number(qtySelector.value); i += 1) {
+                cartCopy = cartCopy.concat({name: e.target.id, cost: e.target.className});
+                countCopy += 1;
+            }
+            setNewCart(cartCopy);
+            setNewCount(countCopy);
+        }
+    };
     useEffect(() => {
-        const allButtons = Array.from(document.querySelectorAll('#products-container button'));
+        const productContainer = document.querySelector('#products-container');
+        
+        
+       
+        productContainer.removeEventListener('click', handleClick);
+        
+       
+        productContainer.addEventListener('click', handleClick);
+    
 
-        allButtons.forEach((button) => {
-            const handleClick = (e) => {
-                const qtySelector = document.querySelector(`#${e.target.id}-select`);
-                let newCart = JSON.parse(JSON.stringify(cart));
-                let newCount = JSON.parse(JSON.stringify(count));
-                for (let i = 0; i < Number(qtySelector.value); i += 1) {
-                    newCart = (newCart.concat({name: e.target.id, cost: e.target.className}));
-                    newCount += 1;
-                }
-                setCart(newCart);
-                setCount(newCount);
-            };
-            button.addEventListener('click', handleClick);
-        });
+        //return (allButtons.forEach((button) => {
+            //button.removeEventListener('click', handleClick);
+        //}));
+    }, []);
 
-        return (allButtons.forEach((button) => {
-            const handleClick = (e) => {
-                const qtySelector = document.querySelector(`#${e.target.id}-select`);
-                let newCart = JSON.parse(JSON.stringify(cart));
-                let newCount = JSON.parse(JSON.stringify(count));
-                for (let i = 0; i < Number(qtySelector.value); i += 1) {
-                    newCart = (newCart.concat({name: e.target.id, cost: e.target.className}));
-                    newCount += 1;
-                }
-                setCart(newCart);
-                setCount(newCount);
-            };
-            button.removeEventListener('click', handleClick);
-        }));
-    }, [cart])
+    useEffect(()=>{
+        setCart(newCart);
+        setCount(newCount);
+    })
 
     return(
       <div id='products-container'>
@@ -62,7 +68,7 @@ const Products = ({count, setCount, cart, setCart}) => {
                                   <option value={5}>5</option>
                               </select>
                           </label>
-                          <button id="Seedwad" className={59.99}>Add to cart</button>
+                          <button id="Seedwad" className={'59.99 add-to-cart'}>Add to cart</button>
                       </div>
                       
                   </div>
@@ -86,7 +92,7 @@ const Products = ({count, setCount, cart, setCart}) => {
                                   <option value={5}>5</option>
                               </select>
                           </label>
-                          <button id="Sound_Sword" className={1200.32}>Add to cart</button>
+                          <button id="Sound_Sword" className={'1200.32 add-to-cart'}>Add to cart</button>
                       </div>
                      
                   </div>
@@ -110,7 +116,7 @@ const Products = ({count, setCount, cart, setCart}) => {
                                   <option value={5}>5</option>
                               </select>
                           </label>
-                          <button id="Lemon_Camel" className={500.99}>Add to cart</button>
+                          <button id="Lemon_Camel" className={'500.99 add-to-cart'}>Add to cart</button>
                       </div>
                   </div>
               </div>
@@ -133,7 +139,7 @@ const Products = ({count, setCount, cart, setCart}) => {
                                   <option value={5}>5</option>
                               </select>
                           </label>
-                          <button id="Catchers_Mitt" className={55.32}>Add to cart</button>
+                          <button id="Catchers_Mitt" className={'55.32 add-to-cart'}>Add to cart</button>
                       </div>
                  
                   </div>
@@ -157,7 +163,7 @@ const Products = ({count, setCount, cart, setCart}) => {
                                   <option value={5}>5</option>
                               </select>
                           </label>
-                          <button id="Lemonsweets_Cap" className={100237}>Add to cart</button>
+                          <button id="Lemonsweets_Cap" className={'100237 add-to-cart'}>Add to cart</button>
                       </div>
                  
                   </div>
@@ -181,7 +187,7 @@ const Products = ({count, setCount, cart, setCart}) => {
                                   <option value={5}>5</option>
                               </select>
                           </label>
-                          <button id="Harp_Smasher" className={23.18}>Add to cart</button>
+                          <button id="Harp_Smasher" className={'23.18 add-to-cart'}>Add to cart</button>
                       </div>
                   </div>
               </div>

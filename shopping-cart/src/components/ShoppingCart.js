@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import uniqid from 'uniqid';
 
-const ShoppingCart = ({cart, setCart}) => {
+const ShoppingCart = ({cart, setCart, count, setCount}) => {
     const [itemInfo, setItemInfo] = useState({'Seedwad' : {name: 'Seedwad', cost: 59.99, quantity: 0},
                                     'Sound_Sword' : {name: 'Sound Sword', cost: 1200.32, quantity: 0},
                                     'Lemon_Camel' : {name: 'Lemon Camel', cost: 500.99, quantity: 0},
@@ -36,9 +36,6 @@ const ShoppingCart = ({cart, setCart}) => {
         if (e.target.id === 'exit-shopping-container') {
             setVisibility("hidden");
         } else if (!Array.from(shoppingContainer.querySelectorAll('*')).includes(e.target) && e.target.id !== "shopping-container" && e.target.id !== "shopping-icon" && e.target.className !== "delete-button") {
-            console.log(`pop goes the weasel`);
-            console.log(`the truth ${Array.from(shoppingContainer.querySelectorAll('*')).includes(e.target)}`)
-            console.log(`tag name ${e.target.tagName}`);
             setVisibility("hidden");
         }
     };
@@ -49,54 +46,32 @@ const ShoppingCart = ({cart, setCart}) => {
         }
     };
 
+
     const handleDeleteClick = (e) => {
-        console.log(`cart ${JSON.stringify(cart)}`);
+        let newCount = count;
         if (e.target.className === 'delete-button') {
             const cartCopy = JSON.parse(JSON.stringify(cart));
             for (let i = 0; i < cartCopy.length; i += 1) {
                 const cartItem = cartCopy[i];
-                console.log(`cartItem ${JSON.stringify(cartItem)}`);
                 if (cartItem.name === e.target.id) {
                     cartCopy.splice(i, 1);
                     i = -1;
+                    newCount -= 1;
+                    setCount(newCount);
                 }
             }
 
-            console.log(`cartCopy ${cartCopy.map((item) => {return JSON.stringify(item)})}`);
-
             setCart(cartCopy);
-
-            setVisibility("visible");
+            console.log(`visibility ${visibility}`);
+            //setVisibility("hidden");
+            //setVisibility("visible");
         }
     };
-    
-    useEffect(() => {
-        resetItemInfo();
-        /*const shoppingContainer = document.querySelector("#shopping-container");
-        shoppingContainer.addEventListener('click', handleDeleteClick);*/
 
-    }, [visibility]);
+    const render = () => {
+        let testID = 0;
 
-    useEffect(() => {
-        const shoppingContainer = document.querySelector("#shopping-container");
-        shoppingContainer.addEventListener('click', handleDeleteClick);
-    })
-
-    useEffect(() => {
-        const wholeContainer = document.querySelector("#whole-container");
-        const shopIcon = document.querySelector('#shopping-icon');
-        const shopExitButton = document.querySelector("#exit-shopping-container");
-       
-        wholeContainer.addEventListener('click', handleExitClick);
-        shopIcon.addEventListener('click', handleEnterClick);
-        shopExitButton.addEventListener('click', handleExitClick);
-      
-    }, []);
-
-    let testID = 0;
-    return (
-    
-        <div id='shopping-container' style={{visibility: visibility}}>
+        const JSX = (<div id='shopping-container' style={{visibility: visibility}}>
             <button id="exit-shopping-container">x</button>
             <ul>
                 {Object.keys(itemInfo).map((key) => {
@@ -111,7 +86,34 @@ const ShoppingCart = ({cart, setCart}) => {
                     return;
                 })}
             </ul>
-    </div>)
+        </div>);
+
+        return JSX;
+    };
+
+    
+    useEffect(() => {
+        resetItemInfo();
+        const shoppingContainer = document.querySelector("#shopping-container");
+
+        if (visibility === 'visible')  shoppingContainer.addEventListener('click', handleDeleteClick);
+        else if (visibility === 'hidden') shoppingContainer.removeEventListener('click', handleDeleteClick);
+
+    }, [visibility]);
+
+
+    useEffect(() => {
+        const wholeContainer = document.querySelector("#whole-container");
+        const shopIcon = document.querySelector('#shopping-icon');
+        const shopExitButton = document.querySelector("#exit-shopping-container");
+       
+        wholeContainer.addEventListener('click', handleExitClick);
+        shopIcon.addEventListener('click', handleEnterClick);
+        shopExitButton.addEventListener('click', handleExitClick);
+      
+    }, []);
+
+    return (render())
 }
 
 export default ShoppingCart;
