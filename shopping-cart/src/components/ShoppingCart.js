@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import uniqid from 'uniqid';
 
-const ShoppingCart = ({cart, setCart, count, setCount, newCart, setNewCart, newCount, setNewCount}) => {
+const ShoppingCart = ({cart, setCart, count, setCount }) => {
     const [itemInfo, setItemInfo] = useState({'Seedwad' : {name: 'Seedwad', cost: 59.99, quantity: 0},
                                     'Sound_Sword' : {name: 'Sound Sword', cost: 1200.32, quantity: 0},
                                     'Lemon_Camel' : {name: 'Lemon Camel', cost: 500.99, quantity: 0},
@@ -10,13 +10,11 @@ const ShoppingCart = ({cart, setCart, count, setCount, newCart, setNewCart, newC
                                     'Harp_Smasher': {name: "Harp Smasher", cost: 23.18, quantity: 0}});
     const [visibility, setVisibility] = useState("hidden");
 
-    let cartCopy = JSON.parse(JSON.stringify(newCart));
-    let countCopy = newCount;
+    let cartCopy = JSON.parse(JSON.stringify(cart));
+    let countCopy = count;
 
-    let finalizedCart = [];
-    let finalizedCount = 0;
 
-    const resetItemInfo = (cartToUse = cart) => {
+    const resetItemInfo = () => {
         if (visibility === 'visible') {
             const blankItemInfo = {'Seedwad' : {name: 'Seedwad', cost: 59.99, quantity: 0},
             'Sound_Sword' : {name: 'Sound Sword', cost: 1200.32, quantity: 0},
@@ -26,14 +24,16 @@ const ShoppingCart = ({cart, setCart, count, setCount, newCart, setNewCart, newC
             'Harp_Smasher': {name: "Harp Smasher", cost: 23.18, quantity: 0}};
             const itemInfoCopy = JSON.parse(JSON.stringify(blankItemInfo));
 
-            for (let i = 0; i < cartToUse.length; i += 1) {
-                const cartItemObj = cartToUse[i];
+            for (let i = 0; i < cartCopy.length; i += 1) {
+                const cartItemObj = cartCopy[i];
                 const internalInfoCopy = JSON.parse(JSON.stringify(itemInfoCopy[cartItemObj.name]));
              
                 internalInfoCopy.quantity = internalInfoCopy.quantity + 1;
                 itemInfoCopy[cartItemObj.name] = internalInfoCopy; 
             }
             setItemInfo(itemInfoCopy);
+            setCart(cartCopy);
+            setCount(countCopy);
         }
     };
 
@@ -63,17 +63,17 @@ const ShoppingCart = ({cart, setCart, count, setCount, newCart, setNewCart, newC
                     cartCopy.splice(i, 1);
                     i = -1;
                     countCopy -= 1;
-                    setNewCount(countCopy);
-                    finalizedCount = countCopy;
+                    setCount(countCopy);
+                   
                     //setNewCount(newCount);
                 }
             }
 
-            setNewCart(cartCopy);
-            finalizedCart = cartCopy
+            setCart(cartCopy);
+          
             //console.log(`newCart ${JSON.stringify(newCart)}`);
             //console.log(`setted newCart ${JSON.stringify(cartCopy)}`);
-            resetItemInfo(cartCopy);
+            resetItemInfo();
             //setNewCart(cartCopy);
             //setVisibility("hidden");
             //setVisibility("visible");
@@ -81,7 +81,7 @@ const ShoppingCart = ({cart, setCart, count, setCount, newCart, setNewCart, newC
     };
 
     const render = () => {
-        //console.log(`finalCart ${JSON.stringify(cart)}`);
+        console.log(`finalCart ${JSON.stringify(cart)}`);
         let testID = 0;
 
         const JSX = (<div id='shopping-container' style={{visibility: visibility}}>
@@ -112,8 +112,8 @@ const ShoppingCart = ({cart, setCart, count, setCount, newCart, setNewCart, newC
 
         if (visibility === 'visible')  shoppingContainer.addEventListener('click', handleDeleteClick);
         //console.log(`finalizedCart ${JSON.stringify(finalizedCart)}`)
-        setCart(finalizedCart);
-        setCount(finalizedCount);
+        //setCart(finalizedCart);
+        //setCount(finalizedCount);
         if (visibility === 'hidden') shoppingContainer.removeEventListener('click', handleDeleteClick);
 
     }, [visibility]);
