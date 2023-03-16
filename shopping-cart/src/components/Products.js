@@ -7,14 +7,16 @@ import sleepingCap from '../images/sleeping-cap.png';
 import harpSmasher from '../images/harp-smasher.png';
 import { useEffect, useState } from 'react';
 
-const Products = ({count, setCount, cart, setCart}) => {
-    const [newCart, setNewCart] = useState(cart);
-    const [newCount, setNewCount] = useState(count);
+const Products = ({count, setCount, cart, setCart, newCart, setNewCart, newCount, setNewCount}) => {
+    //const [newCart, setNewCart] = useState(cart);
+    //const [newCount, setNewCount] = useState(count);
 
-    let cartCopy =JSON.parse(JSON.stringify(newCart));
+    let cartCopy = JSON.parse(JSON.stringify(newCart));
     let countCopy = newCount;
 
     const handleClick = (e) => {
+        console.log(`curr car ${JSON.stringify(cart)}`);
+        console.log(`curr newCart ${JSON.stringify(newCart)}`);
         if (e.target.className.includes('add-to-cart')) {
             const qtySelector = document.querySelector(`#${e.target.id}-select`);
             //let newestCart = JSON.parse(JSON.stringify(newCart));
@@ -26,6 +28,8 @@ const Products = ({count, setCount, cart, setCart}) => {
             setNewCart(cartCopy);
             setNewCount(countCopy);
         }
+        console.log(`curr car after ${JSON.stringify(cart)}`);
+        console.log(`curr newCart after ${JSON.stringify(newCart)}`);
     };
     useEffect(() => {
         const productContainer = document.querySelector('#products-container');
@@ -43,10 +47,15 @@ const Products = ({count, setCount, cart, setCart}) => {
         //}));
     }, []);
 
-    useEffect(()=>{
+    useEffect(()=> {
+        //console.log(`product cart ${JSON.stringify(cart)}`);
+        //console.log(`product newCart ${JSON.stringify(newCart)}`);
         setCart(newCart);
         setCount(newCount);
-    })
+
+        //setNewCart(cart);
+        //setNewCount(count)
+    });
 
     return(
       <div id='products-container'>

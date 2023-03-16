@@ -11,6 +11,9 @@ const RouteSwitch = () => {
     const [count, setCount] = useState(0);
     const [cart, setCart] = useState([]);
 
+    const [newCart, setNewCart] = useState([]);
+    const [newCount, setNewCount] = useState(0);
+
 
     return (
     <div id='whole-container'>
@@ -31,10 +34,10 @@ const RouteSwitch = () => {
             </nav>
             <Routes>
                 <Route path="/" element={<App />}/>
-                <Route path="/products" element={<Products count={count} setCount={(e) => {setCount(e)}} cart={cart} setCart={(e)=> setCart(e)} />} />
+                <Route path="/products" element={<Products count={count} setCount={(e) => {setCount(e)}} cart={cart} setCart={(e)=> setCart(e)} newCart={newCart} setNewCart={(e) => setNewCart(e)} newCount={newCount} setNewCount={(e) => setNewCount(e)}/>} />
             </Routes>
         </BrowserRouter>
-        <ShoppingCart cart={cart} setCart={(e) => setCart(e)} count={count}setCount={e => setCount(e)}/>
+        <ShoppingCart cart={cart} setCart={(e) => setCart(e)} count={count}setCount={e => setCount(e)} newCart={newCart} setNewCart={setNewCart} newCount={newCount} setNewCount={(e)=> setNewCount(e)}/>
     </div>   
     );
 };
