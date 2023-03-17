@@ -113,7 +113,7 @@ describe("ShoppingCart component", () => {
         expect(screen.getByTestId("counter").textContent).toBe("0");
     });
 
-    /*it('Decreases the number of an item when quantity is decreased on shopping page') {
+    it('Shows the correct value of quantity of items', () => {
         render(<RouteSwitch />);
         act(() => userEvent.click(screen.getByRole('link', {name: /Products/i})));
         const allAddToCartButtons = screen.getAllByRole('button', {name: /Add to cart/i});
@@ -124,11 +124,32 @@ describe("ShoppingCart component", () => {
         act(() => userEvent.click(allAddToCartButtons[0]));
 
         act(() => userEvent.click(screen.getByTestId('shopping-icon')));
-        const allShoppingQuantityBoxes = screen.getAllByRole('combobox', {name: /Delete/i});
+        const allShoppingQuantityBoxes = screen.getAllByRole('combobox', {name: /Cart Qty/i});
 
-        act(() => userEvent.selectOptions(allShoppingQuantityBoxes[0], ["1"]));
+        expect(allShoppingQuantityBoxes[0].value).toBe('3');
+
+        //'Decreases the number of an item when quantity is decreased on shopping page'
+        //act(() => userEvent.selectOptions(allShoppingQuantityBoxes[0], ["1"]));
+    }); 
+
+    it('Decreases the number of an item when quantity is decreased on shopping page', () => {
+        render(<RouteSwitch />);
+        act(() => userEvent.click(screen.getByRole('link', {name: /Products/i})));
+        const allAddToCartButtons = screen.getAllByRole('button', {name: /Add to cart/i});
+        act(() => userEvent.click(allAddToCartButtons[0]));
+
+        const allQuantityAdjusters = screen.getAllByRole("combobox");
+        act(() => userEvent.selectOptions(allQuantityAdjusters[0], ["2"]));
+        act(() => userEvent.click(allAddToCartButtons[0]));
+
+        act(() => userEvent.click(screen.getByTestId('shopping-icon')));
+        const allShoppingQuantityBoxes = screen.getAllByRole('combobox', {name: /Cart Qty/i});
         
+        act(() => userEvent.selectOptions(allShoppingQuantityBoxes[0], '1'));
 
+        act(() => userEvent.click(screen.getByRole("button", {name: /x/i})));
+        act(() => userEvent.click(screen.getByTestId('shopping-icon')));
 
-    }*/
+        expect(screen.getByRole('combobox', {name: /Cart Qty/i}).value).toBe('1');
+    });
 });

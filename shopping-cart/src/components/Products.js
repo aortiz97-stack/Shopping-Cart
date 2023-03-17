@@ -26,7 +26,6 @@ const Products = ({count, setCount, cart, setCart }) => {
 
             setCount(countCopy.current);
             setCart(cartCopy.current);
-            console.log(`cart ${JSON.stringify(cart)}`);
         }
     };
     useEffect(() => {
