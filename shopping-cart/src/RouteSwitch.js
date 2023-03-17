@@ -4,16 +4,12 @@ import App from './components/App';
 import Products from './components/Products';
 import ShoppingCart from './components/ShoppingCart';
 import shopIcon from './images/shopping-cart.png';
-import {useState, useEffect} from 'react';
-//import '@testing-library/jest-dom'
+import {useState} from 'react';
+import Checkout from './components/Checkout';
 
 const RouteSwitch = () => {
     const [count, setCount] = useState(0);
     const [cart, setCart] = useState([]);
-
-    //const [newCart, setNewCart] = useState([]);
-    //const [newCount, setNewCount] = useState(0);
-
 
     return (
     <div id='whole-container'>
@@ -38,6 +34,7 @@ const RouteSwitch = () => {
             </Routes>
         </BrowserRouter>
         <ShoppingCart cart={cart} setCart={(e) => setCart(e)} count={count} setCount={(e) => setCount(e)} />
+        <Checkout />
     </div>   
     );
 };

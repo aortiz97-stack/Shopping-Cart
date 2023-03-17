@@ -166,9 +166,6 @@ img {
     padding-bottom: 10px;
 }
 
-.image-container.small {
-}
-
 #products-container button {
     width: 75%;
 }
@@ -233,5 +230,21 @@ img {
     bottom: 15px;
     background-color: #312a2a;
     color: #ffffff
+}
+
+#checkout-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background-color: #ffff00
+}
+
+#unacceptable-container {
+    height: 50%;
+    width: 50%;
 }
 

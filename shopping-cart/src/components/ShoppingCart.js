@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import uniqid from 'uniqid';
 import interact from 'interactjs';
+import Checkout from './Checkout';
 
 const ShoppingCart = ({cart, setCart, count, setCount }) => {
     const [itemInfo, setItemInfo] = useState({'Seedwad' : {name: 'Seedwad', cost: 59.99, quantity: 0},
@@ -133,6 +134,33 @@ const ShoppingCart = ({cart, setCart, count, setCount }) => {
         }
     }
 
+    const handleCheckout = (e) => {
+        if (e.target.id === 'submit') {
+            e.preventDefault();
+
+            const wholeContainer = document.querySelector('#whole-container');
+            const nav = document.querySelector('nav');
+            const shoppingContainer = document.querySelector('#shopping-container');
+            
+            const homeContainer = document.querySelector("#app-container");
+            const productsContainer = document.querySelector("#products-container");
+
+            if (homeContainer !== null) {
+                wholeContainer.removeChild(homeContainer);
+            } else {
+                wholeContainer.removeChild(productsContainer);
+            }
+
+            nav.style.display = "none";
+            shoppingContainer.style.display =  "none";
+        
+            const checkOutContainer = document.querySelector('#checkout-container');
+            checkOutContainer.style.display = "flex";
+            
+        }
+
+    };
+
     const render = () => {
         let testID = 0;
 
@@ -170,10 +198,12 @@ const ShoppingCart = ({cart, setCart, count, setCount }) => {
         if (visibility === 'visible') {
             shoppingContainer.addEventListener('click', handleDeleteClick);
             shoppingContainer.addEventListener('change', handleSelectChange);
+            shoppingContainer.addEventListener('click', handleCheckout);
         }
         if (visibility === 'hidden') {
             shoppingContainer.removeEventListener('click', handleDeleteClick);
             shoppingContainer.removeEventListener('change', handleSelectChange);
+            shoppingContainer.removeEventListener('click', handleCheckout);
         }
 
     }, [visibility]);
@@ -195,11 +225,9 @@ const ShoppingCart = ({cart, setCart, count, setCount }) => {
         let { x } = event.target.dataset
 
         x = event.deltaRect.left
-        //y = event.deltaRect.top
 
         Object.assign(event.target.style, {
           width: `${event.rect.width}px`,
-          //height: `${event.rect.height}px`,
           transform: `translate(${x}px)`
         })
 
