@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import uniqid from 'uniqid';
+import interact from 'interactjs';
 
 const ShoppingCart = ({cart, setCart, count, setCount }) => {
     const [itemInfo, setItemInfo] = useState({'Seedwad' : {name: 'Seedwad', cost: 59.99, quantity: 0},
@@ -13,7 +14,16 @@ const ShoppingCart = ({cart, setCart, count, setCount }) => {
     const cartCopy = useRef(JSON.parse(JSON.stringify(cart)));
     const countCopy = useRef(count);
 
+    const getTotal = () => {
+        let total = 0;
+        const itemInfoKeys = Object.keys(itemInfo);
 
+        for (let i = 0; i < itemInfoKeys.length; i += 1) {
+            const key = itemInfoKeys[i];
+            total += (Number(itemInfo[key].cost) * Number(itemInfo[key].quantity));
+        }
+        return total;
+    }
     const resetItemInfo = () => {
         if (visibility === 'visible') {
             const blankItemInfo = {'Seedwad' : {name: 'Seedwad', cost: 59.99, quantity: 0},
@@ -70,52 +80,56 @@ const ShoppingCart = ({cart, setCart, count, setCount }) => {
 
     const handleSelectChange = (e) => {
         if (e.target.className === 'in-cart-qty-input') {
+
             const newValue = Number(e.target.value);
-            const id = e.target.id.split("-")[1];
-            let quantity = 0;
-            for (let i = 0; i < cartCopy.current.length; i += 1) {
-                if (cartCopy.current[i].name === id) {
-                    quantity += 1
-                }
-            }
-
-            console.log(`quantity ${quantity}`)
-
-            if (quantity > newValue) {
-                console.log(`enterred`);
-                console.log(`newValue ${newValue}`);
-                const numberOfItemsToRemove = quantity - newValue;
-                let numberOfElementsDeleted = 0;
-                console.log(`numberOfItemsToRemove ${numberOfItemsToRemove}`)
-
+            if (newValue <= 100 && newValue >= 0) {
+                const id = e.target.id.split("-")[1];
+                let quantity = 0;
                 for (let i = 0; i < cartCopy.current.length; i += 1) {
-                    const element = cartCopy.current[i];
-                    console.log(`element ${JSON.stringify(element)}`);
-                    console.log(`comparer ${JSON.stringify({name: id, cost: itemInfo[id].cost})}`);
-                    console.log(JSON.stringify(element) === JSON.stringify({name: id, cost: itemInfo[id].cost}))
-                    if (JSON.stringify(element) === JSON.stringify({name: id, cost: itemInfo[id].cost}) && numberOfElementsDeleted < numberOfItemsToRemove) {
-                        console.log(`deletion in progress`);
-                        cartCopy.current.splice(i, 1);
-                        i -= 1;
-                        countCopy.current -= 1;
-                        setCount(countCopy.current);
-                        numberOfElementsDeleted += 1;
+                    if (cartCopy.current[i].name === id) {
+                        quantity += 1
                     }
                 }
-                setCart(cartCopy.current);
-
-            } else if (quantity < newValue) {
-                const numberOfItemsToAdd = newValue - quantity;
-
-                for (let i = 0; i < numberOfItemsToAdd; i += 1) {
-                    cartCopy.current.push({name: id, cost: itemInfo[id].cost});
-                    countCopy.current += 1;
-                    setCount(countCopy.current);
+    
+                if (quantity > newValue) {
+                    const numberOfItemsToRemove = quantity - newValue;
+                    let numberOfElementsDeleted = 0;
+    
+                    for (let i = 0; i < cartCopy.current.length; i += 1) {
+                        const element = cartCopy.current[i];
+                        if (JSON.stringify(element) === JSON.stringify({name: id, cost: itemInfo[id].cost}) && numberOfElementsDeleted < numberOfItemsToRemove) {
+                            cartCopy.current.splice(i, 1);
+                            i -= 1;
+                            countCopy.current -= 1;
+                            setCount(countCopy.current);
+                            numberOfElementsDeleted += 1;
+                        }
+                    }
+                    setCart(cartCopy.current);
+    
+                } else if (quantity < newValue) {
+                    const numberOfItemsToAdd = newValue - quantity;
+    
+                    for (let i = 0; i < numberOfItemsToAdd; i += 1) {
+                        cartCopy.current.push({name: id, cost: itemInfo[id].cost});
+                        countCopy.current += 1;
+                        setCount(countCopy.current);
+                    }
+                    setCart(cartCopy.current);
                 }
-                setCart(cartCopy.current);
+    
+                resetItemInfo();
+            } else {
+                if (newValue < 0) {
+                    alert("Your desired quantity is unacceptable! It's negative, I do not owe you, peasant!");
+                    throw new Error("You cannot input a negative number for quantity.");
+                }
+                else if (newValue > 100) {
+                    alert("Your desired quantity is unacceptable! No more than 100! I have not enough lemons for all!");
+                    throw new Error("The quantity of your items is too much.");
+                }
+                alert("What's this rigamarole? Numbers only!!!");
             }
-
-            resetItemInfo();
         }
     }
 
@@ -124,22 +138,25 @@ const ShoppingCart = ({cart, setCart, count, setCount }) => {
 
         const JSX = (<div id='shopping-container' style={{visibility: visibility}}>
             <button id="exit-shopping-container">x</button>
+            <h3>Your Cart</h3>
             <ul>
                 {Object.keys(itemInfo).map((key) => {
                     testID += 1;
 
                     if (itemInfo[key].quantity !== 0) { 
                         return <li key={uniqid()} data-testid={`l${testID}`}>
-                            <div data-testid={`d${testID}`}>{`${itemInfo[key].name} x ${itemInfo[key].quantity} = $${itemInfo[key].quantity * itemInfo[key].cost}`}</div>
-                            <label htmlFor={`Shopping-${key}-select`}>Cart Qty 
+                             <label htmlFor={`Shopping-${key}-select`}>Cart Qty 
                               <input id={`Shopping-${key}-select`} className={'in-cart-qty-input'} defaultValue={itemInfo[key].quantity} type='text' />
                           </label>
+                            <div data-testid={`d${testID}`}>{`${itemInfo[key].name} x ${itemInfo[key].quantity} = $${(itemInfo[key].quantity * itemInfo[key].cost).toFixed(2).toLocaleString("en-US")}`}</div>
                             <button className='delete-button' id={key}>Delete</button>
                         </li>
                     }
                     return;
                 })}
             </ul>
+            <h3>{`Total: $${getTotal().toFixed(2)}`}</h3>
+            <button type="submit" id="submit">Proceed to Checkout</button>
         </div>);
 
         return JSX;
@@ -170,6 +187,26 @@ const ShoppingCart = ({cart, setCart, count, setCount }) => {
         wholeContainer.addEventListener('click', handleExitClick);
         shopIcon.addEventListener('click', handleEnterClick);
         shopExitButton.addEventListener('click', handleExitClick);
+
+        interact('#shopping-container').resizable({
+    edges: { top: false, left: true, bottom: false, right: true },
+    listeners: {
+      move: function (event) {
+        let { x } = event.target.dataset
+
+        x = event.deltaRect.left
+        //y = event.deltaRect.top
+
+        Object.assign(event.target.style, {
+          width: `${event.rect.width}px`,
+          //height: `${event.rect.height}px`,
+          transform: `translate(${x}px)`
+        })
+
+        Object.assign(event.target.dataset, { x })
+      }
+    }
+  })
       
     }, []);
 
