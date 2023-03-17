@@ -20,7 +20,7 @@ const Products = ({count, setCount, cart, setCart }) => {
             //let cartCopy = JSON.parse(JSON.stringify(cart));
             //let countCopy = JSON.parse(JSON.stringify(count));
             for (let i = 0; i < Number(qtySelector.value); i += 1) {
-                cartCopy.current = cartCopy.current.concat({name: e.target.id, cost: e.target.className});
+                cartCopy.current = cartCopy.current.concat({name: e.target.id, cost: Number(e.target.className.split(" ")[0])});
                 countCopy.current += 1;
             }
 
@@ -35,17 +35,10 @@ const Products = ({count, setCount, cart, setCart }) => {
     useEffect(() => {
         const productContainer = document.querySelector('#products-container');
         
-        
-       
         productContainer.removeEventListener('click', handleClick);
         
-       
         productContainer.addEventListener('click', handleClick);
     
-
-        //return (allButtons.forEach((button) => {
-            //button.removeEventListener('click', handleClick);
-        //}));
     }, []);
 
     return(

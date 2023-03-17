@@ -69,18 +69,32 @@ const ShoppingCart = ({cart, setCart, count, setCount }) => {
     };
 
     const handleSelectChange = (e) => {
-        if (e.target.className === 'in-cart-qty-selector') {
-            const newValue = e.target.value;
-            console.log(`e.target.id ${e.target.id.split("-")}`)
+        if (e.target.className === 'in-cart-qty-input') {
+            const newValue = Number(e.target.value);
             const id = e.target.id.split("-")[1];
+            let quantity = 0;
+            for (let i = 0; i < cartCopy.current.length; i += 1) {
+                if (cartCopy.current[i].name === id) {
+                    quantity += 1
+                }
+            }
 
-            if (itemInfo[id].quantity < newValue) {
-                const numberOfItemsToRemove = itemInfo[id].quantity - newValue;
+            console.log(`quantity ${quantity}`)
+
+            if (quantity > newValue) {
+                console.log(`enterred`);
+                console.log(`newValue ${newValue}`);
+                const numberOfItemsToRemove = quantity - newValue;
                 let numberOfElementsDeleted = 0;
+                console.log(`numberOfItemsToRemove ${numberOfItemsToRemove}`)
 
                 for (let i = 0; i < cartCopy.current.length; i += 1) {
                     const element = cartCopy.current[i];
-                    if (JSON.stringify(element) === {name: id, cost: itemInfo[id].cost} && numberOfElementsDeleted < numberOfItemsToRemove) {
+                    console.log(`element ${JSON.stringify(element)}`);
+                    console.log(`comparer ${JSON.stringify({name: id, cost: itemInfo[id].cost})}`);
+                    console.log(JSON.stringify(element) === JSON.stringify({name: id, cost: itemInfo[id].cost}))
+                    if (JSON.stringify(element) === JSON.stringify({name: id, cost: itemInfo[id].cost}) && numberOfElementsDeleted < numberOfItemsToRemove) {
+                        console.log(`deletion in progress`);
                         cartCopy.current.splice(i, 1);
                         i -= 1;
                         countCopy.current -= 1;
@@ -90,8 +104,8 @@ const ShoppingCart = ({cart, setCart, count, setCount }) => {
                 }
                 setCart(cartCopy.current);
 
-            } else if (itemInfo[id].quantity > newValue) {
-                const numberOfItemsToAdd = newValue - itemInfo[id].quantity;
+            } else if (quantity < newValue) {
+                const numberOfItemsToAdd = newValue - quantity;
 
                 for (let i = 0; i < numberOfItemsToAdd; i += 1) {
                     cartCopy.current.push({name: id, cost: itemInfo[id].cost});
@@ -118,13 +132,7 @@ const ShoppingCart = ({cart, setCart, count, setCount }) => {
                         return <li key={uniqid()} data-testid={`l${testID}`}>
                             <div data-testid={`d${testID}`}>{`${itemInfo[key].name} x ${itemInfo[key].quantity} = $${itemInfo[key].quantity * itemInfo[key].cost}`}</div>
                             <label htmlFor={`Shopping-${key}-select`}>Cart Qty 
-                              <select id={`Shopping-${key}-select`} className={'in-cart-qty-selector'} defaultValue={itemInfo[key].quantity}>
-                                  <option value={1}>1</option>
-                                  <option value={2}>2</option>
-                                  <option value={3}>3</option>
-                                  <option value={4}>4</option>
-                                  <option value={5}>5</option>
-                              </select>
+                              <input id={`Shopping-${key}-select`} className={'in-cart-qty-input'} defaultValue={itemInfo[key].quantity} type='text' />
                           </label>
                             <button className='delete-button' id={key}>Delete</button>
                         </li>

@@ -124,7 +124,7 @@ describe("ShoppingCart component", () => {
         act(() => userEvent.click(allAddToCartButtons[0]));
 
         act(() => userEvent.click(screen.getByTestId('shopping-icon')));
-        const allShoppingQuantityBoxes = screen.getAllByRole('combobox', {name: /Cart Qty/i});
+        const allShoppingQuantityBoxes = screen.getAllByRole('textbox', {name: /Cart Qty/i});
 
         expect(allShoppingQuantityBoxes[0].value).toBe('3');
 
@@ -143,13 +143,13 @@ describe("ShoppingCart component", () => {
         act(() => userEvent.click(allAddToCartButtons[0]));
 
         act(() => userEvent.click(screen.getByTestId('shopping-icon')));
-        const allShoppingQuantityBoxes = screen.getAllByRole('combobox', {name: /Cart Qty/i});
+        const allShoppingQuantityBoxes = screen.getAllByRole('textbox', {name: /Cart Qty/i});
         
-        act(() => userEvent.selectOptions(allShoppingQuantityBoxes[0], '1'));
+        act(() => userEvent.type(allShoppingQuantityBoxes[0], '{backspace}1'));
 
         act(() => userEvent.click(screen.getByRole("button", {name: /x/i})));
         act(() => userEvent.click(screen.getByTestId('shopping-icon')));
 
-        expect(screen.getByRole('combobox', {name: /Cart Qty/i}).value).toBe('1');
+        expect(screen.getByRole('textbox', {name: /Cart Qty/i}).value).toBe('1');
     });
 });
