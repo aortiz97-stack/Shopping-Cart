@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/react-gh-pages/static/css/main.62b6870f.css",
-    "main.js": "/react-gh-pages/static/js/main.6790ee10.js",
-    "static/media/seedwad.png": "/react-gh-pages/static/media/seedwad.31d5875fcd792f5a43b2.png",
-    "static/media/catchersmitt.png": "/react-gh-pages/static/media/catchersmitt.8143569b1fc99e0d6836.png",
-    "static/media/harp-smasher.png": "/react-gh-pages/static/media/harp-smasher.6c2b2af9f285f8a9132b.png",
-    "static/media/Thunderman.ttf": "/react-gh-pages/static/media/Thunderman.6e86eb5a76f838564cd1.ttf",
-    "static/media/sleeping-cap.png": "/react-gh-pages/static/media/sleeping-cap.4caea97c3541aea6b96e.png",
-    "static/media/lemongrab.png": "/react-gh-pages/static/media/lemongrab.c2c1d2eea4d6ac2f4c43.png",
-    "static/media/lemoncamel.png": "/react-gh-pages/static/media/lemoncamel.f194d41469c73413fb12.png",
-    "static/media/unacceptable-lemongrab.jpeg": "/react-gh-pages/static/media/unacceptable-lemongrab.46d099d3b0741182d3ed.jpeg",
-    "static/media/sound-sword.png": "/react-gh-pages/static/media/sound-sword.2c7a6c70a04d8c7b1763.png",
-    "index.html": "/react-gh-pages/index.html",
-    "main.62b6870f.css.map": "/react-gh-pages/static/css/main.62b6870f.css.map",
-    "main.6790ee10.js.map": "/react-gh-pages/static/js/main.6790ee10.js.map"
+    "main.css": "/Shopping-Cart/static/css/main.b0f196eb.css",
+    "main.js": "/Shopping-Cart/static/js/main.18489b59.js",
+    "static/media/seedwad.png": "/Shopping-Cart/static/media/seedwad.31d5875fcd792f5a43b2.png",
+    "static/media/catchersmitt.png": "/Shopping-Cart/static/media/catchersmitt.8143569b1fc99e0d6836.png",
+    "static/media/harp-smasher.png": "/Shopping-Cart/static/media/harp-smasher.6c2b2af9f285f8a9132b.png",
+    "static/media/Thunderman.ttf": "/Shopping-Cart/static/media/Thunderman.6e86eb5a76f838564cd1.ttf",
+    "static/media/sleeping-cap.png": "/Shopping-Cart/static/media/sleeping-cap.4caea97c3541aea6b96e.png",
+    "static/media/lemongrab.png": "/Shopping-Cart/static/media/lemongrab.c2c1d2eea4d6ac2f4c43.png",
+    "static/media/lemoncamel.png": "/Shopping-Cart/static/media/lemoncamel.f194d41469c73413fb12.png",
+    "static/media/unacceptable-lemongrab.jpeg": "/Shopping-Cart/static/media/unacceptable-lemongrab.46d099d3b0741182d3ed.jpeg",
+    "static/media/sound-sword.png": "/Shopping-Cart/static/media/sound-sword.2c7a6c70a04d8c7b1763.png",
+    "index.html": "/Shopping-Cart/index.html",
+    "main.b0f196eb.css.map": "/Shopping-Cart/static/css/main.b0f196eb.css.map",
+    "main.18489b59.js.map": "/Shopping-Cart/static/js/main.18489b59.js.map"
   },
   "entrypoints": [
-    "static/css/main.62b6870f.css",
-    "static/js/main.6790ee10.js"
+    "static/css/main.b0f196eb.css",
+    "static/js/main.18489b59.js"
   ]
 }
