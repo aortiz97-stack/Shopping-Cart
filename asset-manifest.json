@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Shopping-Cart/static/css/main.b0f196eb.css",
-    "main.js": "/Shopping-Cart/static/js/main.18489b59.js",
+    "main.css": "/Shopping-Cart/static/css/main.4a208aed.css",
+    "main.js": "/Shopping-Cart/static/js/main.4c9c24f5.js",
     "static/media/seedwad.png": "/Shopping-Cart/static/media/seedwad.31d5875fcd792f5a43b2.png",
     "static/media/catchersmitt.png": "/Shopping-Cart/static/media/catchersmitt.8143569b1fc99e0d6836.png",
     "static/media/harp-smasher.png": "/Shopping-Cart/static/media/harp-smasher.6c2b2af9f285f8a9132b.png",
@@ -12,11 +12,11 @@
     "static/media/unacceptable-lemongrab.jpeg": "/Shopping-Cart/static/media/unacceptable-lemongrab.46d099d3b0741182d3ed.jpeg",
     "static/media/sound-sword.png": "/Shopping-Cart/static/media/sound-sword.2c7a6c70a04d8c7b1763.png",
     "index.html": "/Shopping-Cart/index.html",
-    "main.b0f196eb.css.map": "/Shopping-Cart/static/css/main.b0f196eb.css.map",
-    "main.18489b59.js.map": "/Shopping-Cart/static/js/main.18489b59.js.map"
+    "main.4a208aed.css.map": "/Shopping-Cart/static/css/main.4a208aed.css.map",
+    "main.4c9c24f5.js.map": "/Shopping-Cart/static/js/main.4c9c24f5.js.map"
   },
   "entrypoints": [
-    "static/css/main.b0f196eb.css",
-    "static/js/main.18489b59.js"
+    "static/css/main.4a208aed.css",
+    "static/js/main.4c9c24f5.js"
   ]
 }
