@@ -166,7 +166,7 @@ const ShoppingCart = ({cart, setCart, count, setCount }) => {
 
         const JSX = (<div id='shopping-container' style={{visibility: visibility}}>
             <button id="exit-shopping-container">x</button>
-            <h3>Your Cart</h3>
+            <h1>Your Cart</h1>
             <ul>
                 {Object.keys(itemInfo).map((key) => {
                     testID += 1;

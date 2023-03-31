@@ -6,7 +6,7 @@ const App = () => {
       <div className='img-container'>
         <img src={lemongrab} alt="The Earl of Lemongrab, a yellow lemon humanoid"/>
       </div>
-      <h3>Hmmm don't buy my things</h3>
+      <b>Hmmm don't buy my things</b>
     </div>
   );
 }

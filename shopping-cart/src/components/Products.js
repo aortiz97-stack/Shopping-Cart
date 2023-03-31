@@ -8,17 +8,12 @@ import harpSmasher from '../images/harp-smasher.png';
 import { useEffect, useState, useRef } from 'react';
 
 const Products = ({count, setCount, cart, setCart }) => {
-    //const [newCart, setNewCart] = useState(cart);
-    //const [newCount, setNewCount] = useState(count);
-
     const cartCopy = useRef(JSON.parse(JSON.stringify(cart)));
     const countCopy = useRef(count)
 
     const handleClick = (e) => {
         if (e.target.className.includes('add-to-cart')) {
             const qtySelector = document.querySelector(`#${e.target.id}-select`);
-            //let cartCopy = JSON.parse(JSON.stringify(cart));
-            //let countCopy = JSON.parse(JSON.stringify(count));
             for (let i = 0; i < Number(qtySelector.value); i += 1) {
                 cartCopy.current = cartCopy.current.concat({name: e.target.id, cost: Number(e.target.className.split(" ")[0])});
                 countCopy.current += 1;

@@ -22,7 +22,7 @@ const RouteSwitch = () => {
                         <div id='shopping-icon-container'>
                             <img src={shopIcon} alt="shopping cart icon" id="shopping-icon" data-testid="shopping-icon"/>
                             <div id='counter-container'>
-                                <div id='counter' data-testid = 'counter'>{count}</div>
+                                <sup id='counter' data-testid = 'counter'>{count}</sup>
                             </div>
                         </div>
                     </button></li>
